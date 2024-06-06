@@ -95,4 +95,5 @@ class Scanner{
 
         current++;
         return true;
+    }
 }
