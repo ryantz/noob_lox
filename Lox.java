@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class lox{
+public class Lox{
     static boolean hadError = false;
 
     public static void main(String[] args) throws IOException{
@@ -24,14 +24,14 @@ public class lox{
 
     //starting lox from a cmd line and path, reads and executes file
     private static void runFile(String path) throws IOException{
-        byte[] bytes = Files.readAllBytes(Path.get(path));
+        byte[] bytes = Files.readAllBytes(Paths.get(path));
         run(new String(bytes, Charset.defaultCharset()));
 
         //indicate error in the exit code
         if(hadError) System.exit(65);
     }
 
-    //run interactively, prompt to enter and execute code one line at a time
+    //run interactively, prompt to enter and execute  code one line at a time
     //Ctrl-D to exit
     private static void runPrompt() throws IOException{
         InputStreamReader input = new InputStreamReader(System.in);

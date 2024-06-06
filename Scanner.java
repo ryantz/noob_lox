@@ -44,6 +44,25 @@ class Scanner{
             case '.': addToken(DOT); break;
             case ';': addToken(SEMI_COLON); break;
             case ',': addToken(COMMA); break;
+
+            //cases which can be !=, ==, ....
+            // if ! matches = , != else !
+            case '!':
+                addToken(match('=') ? EXCAIM_EQUAL : EXCLAIM);
+                break;
+            case '=':
+                addToken(match('=') ? EQUAL_EQUAL : EQUAL);
+                break;
+            case '<':
+                addToken(match('=') ? LESS_EQUAL : LESS);
+                break;
+            case '>':
+                addToken(match('=') ? GREATER_EQUAL : GREATER);
+
+            //for cases where the character is not recognised
+            default:
+                Lox.error(line, "Unexpected character.");
+                break;
         }
     }
 
@@ -67,4 +86,13 @@ class Scanner{
         String text = source.substring(start, current);
         tokens.add(new Token(type, text, literal, line));
     }
+
+    private boolean match(char expected){
+
+        //if at end of string or current token is not the same as entered
+        if(isAtEnd()) return false;
+        if(source.charAt(current) != expected) return false;
+
+        current++;
+        return true;
 }
