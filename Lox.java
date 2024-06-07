@@ -40,7 +40,7 @@ public class Lox{
         //infinite loop. Same as while(true)
         for(;;){
             System.out.print("> ");
-            String line = reader.readline();
+            String line = reader.readLine();
             if(line == null) break;
             run(line);
 
